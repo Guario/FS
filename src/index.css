@@ -1,0 +1,31 @@
+body {
+  margin: 10px;
+  padding: 10px;
+  font-family: sans-serif;
+  width: fit-content;
+}
+button{
+  margin: 5px ;
+}
+
+li{
+  list-style-type: none;
+}
+
+ul a:hover{
+  color: #0000FF;
+
+}
+
+ul a{
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+ #folder{
+  list-style-image: url(folder.png);
+}
+#file{
+  list-style-image: url(file.png);
+}

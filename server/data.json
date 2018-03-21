@@ -1,0 +1,26 @@
+[
+  {
+    "name": "main",
+    "type": "folder",
+    "children":[]
+  },
+  {
+    "name": "about",
+    "type": "file"
+  },
+  {
+    "name": "news:",
+    "type": "folder",
+    "children": [
+      {
+        "name": "about",
+        "type": "file"
+      },
+      {
+        "name": "IT",
+        "type": "folder",
+        "children":[]
+      }
+    ]
+  }
+]
