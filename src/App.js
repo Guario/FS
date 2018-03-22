@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {FoldEl} from './FoldEl';
 
-class App extends Component {
+export class App extends Component {
 
     constructor(props) {
         super(props);
@@ -12,16 +12,11 @@ class App extends Component {
             objs: [],
             files: [],
             folders: [],
-            name: ''
+            name: '',
+
 
         }
 
-    }
-
-    onInputChange(event) {
-        const name = event.target.name;
-        this.setState({[name]: event.target.value});
-        console.log(name + ": " + event.target.value);
     }
 
 
@@ -47,12 +42,12 @@ class App extends Component {
         });
     };
 
-      Logger =() =>{
-           console.log('files');
-           console.log(this.state.files);
-           console.log('folders');
-           console.log(this.state.folders);
-       };
+    Logger = () => {
+        console.log('files');
+        console.log(this.state.files);
+        console.log('folders');
+        console.log(this.state.folders);
+    };
 
     componentWillMount() {
         console.log('element will be mount')
@@ -66,6 +61,16 @@ class App extends Component {
     componentWillUpdate(nextProps, nextState) {
         console.log('---', 'will update')
     }
+
+
+
+    onSelect = () => {
+        this.props.selected={
+            name: this.state.name,
+            type: this.state.folders,
+        };
+
+    };
 
     render() {
 
@@ -81,11 +86,10 @@ class App extends Component {
                 </div>
 
 
-
                 <ul>
 
 
-                    <FoldEl folders={this.state.folders} />
+                    <FoldEl select={this.onSelect} folders={this.state.folders}/>
 
                     {
                         this.state.files.map((item, index) => {

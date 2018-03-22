@@ -8,7 +8,8 @@ export class FoldEl extends Component {
         this.state = {
             index: props.index,
             name: props.name,
-            children: props.children || []
+            children: props.children || [],
+
         }
 
     }
@@ -28,6 +29,10 @@ export class FoldEl extends Component {
         )
     }
 
+
+
+
+
     render()
     {
 
@@ -38,7 +43,7 @@ export class FoldEl extends Component {
             <ul>
                 {this.props.folders.map((item, index) => {
                     return(
-                    <li key={index} id="folder">{item.name}</li>
+                    <li onClick={this.onSelect} key={index} id="folder">{item.name}</li>
                     )
                 })}
 
