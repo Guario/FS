@@ -1,11 +1,11 @@
-const initialState = [];
+const initialState = {};
 
 export default function files(state = initialState, action) {
     if (action.type === 'ADD_FILE') {
-        return [
+        return {
             ...state,
-            {item: action.payload}
-        ];
+            item: action.payload
+        }
     }
     return state;
 }

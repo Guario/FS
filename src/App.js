@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {FoldEl} from './FoldEl';
 
+
 export class App extends Component {
 
     constructor(props) {
@@ -25,11 +26,11 @@ export class App extends Component {
 
 
     folderSaver = () => {
-        this.props.folderSaver(this.state.name);
+        return this.props.folderSaver(this.state.name);
     };
 
     fileSaver = () => {
-        this.props.fileSaver(this.state.name);
+        return this.props.fileSaver(this.state.name);
     };
 
     Logger = () => {
@@ -49,8 +50,9 @@ export class App extends Component {
 
 
     componentWillUpdate(nextProps, nextState) {
-        console.log( 'will update')
+        console.log( 'will update', nextProps, nextState);
         // nextProps
+        
         if (this.props.item !== nextProps.item) {
             let _objs = this.state.objs;
             this.setState({
@@ -98,7 +100,8 @@ export class App extends Component {
 
 export default connect(
     state => ({
-        objs: state.objs
+        newFile: state.files.item,
+        newDir:  state.folders.item
     }),
     dispatch => ({
         fileSaver: (name) => {

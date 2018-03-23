@@ -1,12 +1,12 @@
 
-const initialState = [];
+const initialState = {item: null};
 
 export default function folders(state = initialState, action) {
     if (action.type === 'ADD_FOLDER') {
-        return [
+        return {
             ...state,
-            {item: action.payload}
-        ];
+            item: action.payload
+        };
     }
     return state;
 }
