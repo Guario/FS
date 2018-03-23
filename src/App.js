@@ -10,11 +10,7 @@ export class App extends Component {
         this.state = {
             isEnabled: false,
             objs: [],
-            files: [],
-            folders: [],
             name: '',
-
-
         }
 
     }
@@ -29,17 +25,11 @@ export class App extends Component {
 
 
     folderSaver = () => {
-        this.setState({
-            folders: [...this.state.folders, {name: this.state.name}],
-            name: ''
-        });
+        this.props.folderSaver(this.state.name);
     };
 
     fileSaver = () => {
-        this.setState({
-            files: [...this.state.files, {name: this.state.name}],
-            name: ''
-        });
+        this.props.fileSaver(this.state.name);
     };
 
     Logger = () => {
@@ -59,18 +49,28 @@ export class App extends Component {
 
 
     componentWillUpdate(nextProps, nextState) {
-        console.log('---', 'will update')
+        console.log( 'will update')
+        // nextProps
+        if (this.props.item !== nextProps.item) {
+            let _objs = this.state.objs;
+            this.setState({
+                objs: _objs.concat(nextProps.item)
+            })
+        }
     }
 
+    renderItems(el, index) {
+        if (el.type === 'folder') {
+            return (<FoldEl name={el.name} index={el.index} children={el.children}/>)
+        }
 
+        return (
+            <a><li onClick={this.onSelect} key={index}>
+                {el.name}
+            </li></a>
+        )
+    }
 
-    onSelect = () => {
-        this.props.selected={
-            name: this.state.name,
-            type: this.state.folders,
-        };
-
-    };
 
     render() {
 
@@ -81,27 +81,13 @@ export class App extends Component {
                     <input value={this.state.name} type="text" onChange={this.onChange}/>
                     <button onClick={this.fileSaver}>Add File</button>
 
-                    <button onClick={this.folderSaver}>Add Folder</button>
+                    <button onClick={this.folderSaver} >Add Folder</button>
                     {/*<button onClick={this.Logger}>Log</button>*/}
                 </div>
 
 
                 <ul>
-
-
-                    <FoldEl select={this.onSelect} folders={this.state.folders}/>
-
-                    {
-                        this.state.files.map((item, index) => {
-                            return (
-                                <a>
-                                    <li key={index} id="file">{item.name}</li>
-                                </a>
-                            );
-                        })
-                    }
-
-
+                    {this.state.objs.forEach((el, index) => this.renderItems(el, index))}
                 </ul>
             </div>
         );

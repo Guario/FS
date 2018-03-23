@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
 
+import React, {Component} from 'react';
 
 export class FoldEl extends Component {
 
@@ -21,37 +21,35 @@ export class FoldEl extends Component {
             this.setState({children:children});
         }
     }
-    renederChild(el, idx) {
+    renederChild(el, index) {
         return (
-            <li key={idx}>
+            <a><li onClick={this.onSelect} key={index}>
                 {el.name}
-            </li>
+            </li></a>
         )
     }
 
+    onSelect = () => {
 
+        this.props.selected={
+            name: this.state.name,
+            type: this.state.folders
+        };
+
+    };
 
 
 
     render()
     {
-
+        let {index, name} = this.state;
         return(
 
-
-            <a>
             <ul>
-                {this.props.folders.map((item, index) => {
-                    return(
-                    <li onClick={this.onSelect} key={index} id="folder">{item.name}</li>
-                    )
-                })}
-
-
-
-                {this.state.children.map((el, idx)=> this.renederChild(el, idx))}
+                <li onClick={this.props.onSelect} key={index} id="folder">{name}</li>
+                {/* this.state.children.map((el, index)=> this.renederChild(el, index)) */}
             </ul>
-            </a>
+
         )
     }
 }
